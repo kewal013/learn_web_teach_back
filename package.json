@@ -1,0 +1,33 @@
+{
+    "name": "template-service",
+    "version": "0.0.1",
+    "private": true,
+    "description": "New Swagger API Project",
+    "keywords": [],
+    "author": "",
+    "license": "",
+    "main": "app.js",
+    "dependencies": {
+        "bunyan": "^1.8.8",
+        "dotenv": "^4.0.0",
+        "mysql": "^2.15.0",
+        "njwt": "^0.4.0",
+        "q": "^1.5.1",
+        "request-promise": "^4.2.2",
+        "restify": "^4.0.2",
+        "restify-jwt": "^0.4.0",
+        "rethinkdbdash": "^2.3.31",
+        "swagger-restify-mw": "^0.1.0"
+    },
+    "devDependencies": {
+        "rethinkdb-mock": "latest",
+        "should": "latest",
+        "supertest": "latest",
+        "mock-require": "latest",
+        "mocha": "latest"
+    },
+    "scripts": {
+        "start": "node app.js",
+        "test": "mocha"
+    }
+}

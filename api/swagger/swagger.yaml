@@ -1,0 +1,117 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Learn Web Teach
+basePath: /v2/components/learn_web_teach
+schemes:
+  - http
+# format of bodies a client can send (Content-Type)
+securityDefinitions:
+  UserSecurity:
+    type: apiKey
+    in: header
+    name: Authorization
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /swagger:
+    x-swagger-pipe: swagger_raw
+  /learnWebTeach/login:  
+    post:
+      tags:
+      - "WebTeach"
+      summary: "user login details"
+      description: "user login details"
+      operationId: "userLogin"
+      # security: 
+      #   - UserSecurity: [] 
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Login details that need to be added to the system."
+        required: true
+        schema:
+          $ref: "#/definitions/loginDetails"
+      responses:
+        200:
+          description: "login details"
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "Error creating a new login"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "webteach_service"
+  /learnWebTeach/signup:  
+    post:
+      tags:
+      - "WebTeach"
+      summary: "user signup details"
+      description: "user signup details"
+      operationId: "userSignup"
+      # security: 
+      #   - UserSecurity: [] 
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "signup details that need to be added to the system."
+        required: true
+        schema:
+          $ref: "#/definitions/signupDetails"
+      responses:
+        200:
+          description: "signup details"
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "Error creating a new login"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "webteach_service"
+
+# complex objects have schema definitions
+definitions:
+  loginDetails:
+    type: "object"
+    required: ["userName","password"]
+    properties:
+      userName:   
+        type: "string"
+        description: "title of the template"
+      password:   
+        type: "string"
+        description: "body of the template"
+  signupDetails:
+    type: "object"
+    required: ["userName","password","email"]
+    properties:
+      userName:   
+        type: "string"
+        description: "title of the template"
+      password:   
+        type: "string"
+        description: "body of the template"
+      email:   
+        type: "string"
+        description: "title of the template"
+      organization:   
+        type: "string"
+        description: "body of the template"
+      designation:   
+        type: "string"
+        description: "body of the template"
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
