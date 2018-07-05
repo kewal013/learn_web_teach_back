@@ -103,12 +103,6 @@ definitions:
       email:   
         type: "string"
         description: "title of the template"
-      organization:   
-        type: "string"
-        description: "body of the template"
-      designation:   
-        type: "string"
-        description: "body of the template"
   ErrorResponse:
     required:
       - message
