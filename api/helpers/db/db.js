@@ -16,23 +16,27 @@ function connection() {
         user: dbconfig.mysql.user,
         password: dbconfig.mysql.password
     });
-    con.connect(function(err) {
-        if (err) throw err;
-        console.log("Connected!");
-        var createDatabase = "CREATE DATABASE " + dbconfig.mysql.db;
-        con.query(createDatabase, function(err, result) {
-            if (err) {
-                console.log("Database exist");
-                // dbconfig.tables.forEach(function(data) {
-                //     // createtable(con, data.table);
-                // })
-            } else {
-                console.log("Database created");
-                // dbconfig.tables.forEach(function(data) {
-                //     createtable(con, data.table);
-                // })
-            }
-        });
+    con.connect(function(err, res) {
+        if (err) {
+            console.log("Connection to Database Failed");
+            connection();
+        } else {
+            console.log("Connected!");
+            var createDatabase = "CREATE DATABASE " + dbconfig.mysql.db;
+            con.query(createDatabase, function(err, result) {
+                if (err) {
+                    console.log("Database exist");
+                    // dbconfig.tables.forEach(function(data) {
+                    //     // createtable(con, data.table);
+                    // })
+                } else {
+                    console.log("Database created");
+                    // dbconfig.tables.forEach(function(data) {
+                    //     createtable(con, data.table);
+                    // })
+                }
+            });
+        }
     });
 };
 

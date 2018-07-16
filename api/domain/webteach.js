@@ -8,6 +8,7 @@ var _ = require('lodash'),
     Logger = require('bunyan');
 const uuidv4 = require('uuid/v4');
 var nJwt = require('njwt');
+var fs = require('fs');
 
 var log = new Logger.createLogger({
     name: 'webteach-service',
@@ -122,7 +123,8 @@ webteach.prototype.getUserBlogs = (username, cb) => {
 }
 
 function generateToken(cb) {
-    var secretKey = process.env.TOKEN_KEY;
+    // var secretKey = process.env.TOKEN_KEY;
+    var secretKey = fs.readFileSync('./config/cert.pem');
     var claims = {
         sub: 'user9876',
         iss: 'https://mytrustyapp.com',
@@ -134,17 +136,17 @@ function generateToken(cb) {
     cb(token);
 }
 
-function verifyToken(token, cb) {
-    var secretKey = process.env.TOKEN_KEY;
-    nJwt.verify(token, secretKey, function(err, verifiedJwt) {
-        if (err) {
-            console.log(err); // Token has expired, has been tampered with, etc
-            cb(false);
-        } else {
-            console.log(verifiedJwt); // Will contain the header and body
-            cb(true);
-        }
-    });
-}
+// function verifyToken(token, cb) {
+//     var secretKey = process.env.TOKEN_KEY;
+//     nJwt.verify(token, secretKey, function(err, verifiedJwt) {
+//         if (err) {
+//             console.log(err); // Token has expired, has been tampered with, etc
+//             cb(false);
+//         } else {
+//             console.log(verifiedJwt); // Will contain the header and body
+//             cb(true);
+//         }
+//     });
+// }
 
 module.exports = webteach;

@@ -106,8 +106,8 @@ paths:
       summary: "get all blogs"
       description: "get all blogs"
       operationId: "getUserBlogs"
-      # security: 
-      #   - UserSecurity: [] 
+      security: 
+        - UserSecurity: [] 
       produces:
       - "application/json"
       parameters:
