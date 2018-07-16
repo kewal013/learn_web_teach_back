@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: "0.0.1"
   title: Learn Web Teach
-basePath: /v2/components/learn_web_teach
+basePath: /v2/components
 schemes:
   - http
 # format of bodies a client can send (Content-Type)
@@ -66,6 +66,56 @@ paths:
         required: true
         schema:
           $ref: "#/definitions/signupDetails"
+      responses:
+        200:
+          description: "signup details"
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "Error creating a new login"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "webteach_service"
+  /learnWebTeach/getAllBlogs:  
+    get:
+      tags:
+      - "WebTeach"
+      summary: "get all blogs"
+      description: "get all blogs"
+      operationId: "getAllBlogs"
+      # security: 
+      #   - UserSecurity: [] 
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "signup details"
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "Error creating a new login"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "webteach_service"
+  /learnWebTeach/user/{username}/getBlogs:  
+    get:
+      tags:
+      - "WebTeach"
+      summary: "get all blogs"
+      description: "get all blogs"
+      operationId: "getUserBlogs"
+      # security: 
+      #   - UserSecurity: [] 
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "path"
+        description: "username"
+        required: true
+        type: "string"
       responses:
         200:
           description: "signup details"
