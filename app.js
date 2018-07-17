@@ -6,7 +6,8 @@ dotenv.load();
 var SwaggerRestify = require('swagger-restify-mw');
 var restify = require('restify');
 var app = restify.createServer();
-var jwt = require('restify-jwt');
+// var jwt = require('restify-jwt');
+var nJwt = require('njwt');
 var Logger = require('bunyan'),
     dbUtils = require('./api/helpers/db/db'),
     _ = require('lodash'),
@@ -48,12 +49,32 @@ var config = {
     appRoot: __dirname,
     swaggerSecurityHandlers: {
         UserSecurity: function(req, authOrSecDef, scopesOrApiKey, cb) {
-            jwt(req, req.res, function(err) {
-                return cb(null);
+            verifyToken(req.headers.authorization, function(err, result) {
+                if (err) {
+                    // res.end(err);
+                    return cb(err);
+                } else {
+                    return cb(null);
+                }
             });
         }
     }
 };
+
+function verifyToken(token, cb) {
+    // var secretKey = process.env.TOKEN_KEY;
+    var secretKey = fs.readFileSync('./config/cert.pem');
+    // console.log(token);
+    nJwt.verify(token, secretKey, function(err, verifiedJwt) {
+        if (err) {
+            // console.log(err); // Token has expired, has been tampered with, etc
+            cb(err);
+        } else {
+            // console.log(verifiedJwt); // Will contain the header and body
+            cb(null, true);
+        }
+    });
+}
 
 
 dbUtils.connection();
