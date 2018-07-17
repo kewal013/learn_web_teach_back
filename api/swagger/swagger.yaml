@@ -127,6 +127,123 @@ paths:
         default:
           description: "Unexpected error"
       x-swagger-router-controller: "webteach_service"
+  /learnWebTeach/blog:  
+    post:
+      tags:
+      - "WebTeach"
+      summary: "save blog data"
+      description: "save blog data"
+      operationId: "saveBlogData"
+      security: 
+        - UserSecurity: [] 
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "blog details that need to be added to the system."
+        required: true
+        schema:
+          $ref: "#/definitions/blogData"
+      responses:
+        200:
+          description: "blog details"
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "Error creating a new login"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "webteach_service"
+  /learnWebTeach/{blogId}/blog: 
+    get:
+      tags:
+      - "WebTeach"
+      summary: "save blog data"
+      description: "save blog data"
+      operationId: "getBlogData"
+      security: 
+        - UserSecurity: [] 
+      produces:
+      - "application/json"
+      parameters:
+      - name: "blogId"
+        in: "path"
+        description: "blogId"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "blog details"
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "Error creating a new login"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "webteach_service"
+    put:
+      tags:
+      - "WebTeach"
+      summary: "save blog data"
+      description: "save blog data"
+      operationId: "updateBlogData"
+      security: 
+        - UserSecurity: [] 
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "blog details that need to be added to the system."
+        required: true
+        schema:
+          $ref: "#/definitions/blogData"
+      - name: "blogId"
+        in: "path"
+        description: "blogId"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "blog details"
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "Error creating a new login"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "webteach_service"
+    delete:
+      tags:
+      - "WebTeach"
+      summary: "save blog data"
+      description: "save blog data"
+      operationId: "deleteBlogData"
+      security: 
+        - UserSecurity: [] 
+      produces:
+      - "application/json"
+      parameters:
+      - name: "blogId"
+        in: "path"
+        description: "blogId"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "blog details"
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "Error creating a new login"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "webteach_service"
 
 # complex objects have schema definitions
 definitions:
@@ -153,6 +270,33 @@ definitions:
       email:   
         type: "string"
         description: "title of the template"
+  blogData:
+    type: "object"
+    properties:
+      content_title:   
+        type: "string"
+        description: "title of the template"  
+      content_url:   
+        type: "string"
+        description: "title of the template"  
+      content:   
+        type: "string"
+        description: "title of the template"  
+      content_published_by:   
+        type: "string"
+        description: "title of the template"  
+      content_published_on:   
+        type: "string"
+        description: "title of the template"  
+      content_technology:   
+        type: "string"
+        description: "title of the template"  
+      content_tag:   
+        type: "string"
+        description: "title of the template"  
+      blog_image:   
+        type: "string"
+        description: "title of the template"  
   ErrorResponse:
     required:
       - message

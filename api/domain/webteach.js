@@ -149,4 +149,80 @@ function generateToken(cb) {
 //     });
 // }
 
+webteach.prototype.saveBlogData = (cb) => {
+    var response = {
+        "statusCode": 404,
+        "message": "Invalid Data"
+    }
+    webteach.prototype.data.content_id = uuidv4();
+    var sql = "INSERT into blogdata values('" + webteach.prototype.data.content_id + "','" + webteach.prototype.data.content_title + "','" + webteach.prototype.data.content_url + "','" + webteach.prototype.data.content + "','" + webteach.prototype.data.content_published_by + "','" + webteach.prototype.data.content_published_on + "','" + webteach.prototype.data.content_technology + "','" + webteach.prototype.data.content_tag + "','" + webteach.prototype.data.blog_image + "')";
+    console.log(sql);
+    con.query(sql, function(err, res) {
+        if (err) {
+            cb(response);
+        } else {
+            cb(null, res);
+        }
+    });
+
+}
+
+webteach.prototype.updateBlogData = (blogId, cb) => {
+    var response = {
+            "statusCode": 404,
+            "message": "Invalid Data"
+        }
+        // webteach.prototype.data.content_id = uuidv4();
+        // var sql = "UPDATE into userdetails WHERE content_id = '" + blogId + "' values('" + webteach.prototype.data.content_id + "','" + webteach.prototype.data.content_title + "','" + webteach.prototype.data.content_url + "','" + webteach.prototype.data.content + "','" + webteach.prototype.data.content_published_by + "','" + webteach.prototype.data.content_published_on + "','" + webteach.prototype.data.content_technology + "','" + webteach.prototype.data.content_tag + "','" + webteach.prototype.data.blog_image + "')";
+
+    var sql = "UPDATE blogdata SET content_title = '" + webteach.prototype.data.content_title + "', content = '" + webteach.prototype.data.content + "' WHERE content_id ='" + blogId + "'";
+    console.log(sql);
+    con.query(sql, function(err, res) {
+        if (err) {
+            cb(response);
+        } else {
+            cb(null, res);
+        }
+    });
+
+}
+
+webteach.prototype.getBlogData = (blogId, cb) => {
+    var response = {
+            "statusCode": 404,
+            "message": "Invalid Data"
+        }
+        // webteach.prototype.data.content_id = uuidv4();
+    var sql = "SELECT * FROM blogdata WHERE content_id = '" + blogId + "'";
+
+    console.log(sql);
+    con.query(sql, function(err, res) {
+        if (err) {
+            cb(response);
+        } else {
+            cb(null, res);
+        }
+    });
+
+}
+
+webteach.prototype.deleteBlogData = (blogId, cb) => {
+    var response = {
+            "statusCode": 404,
+            "message": "Invalid Data"
+        }
+        // webteach.prototype.data.content_id = uuidv4();
+    var sql = "DELETE FROM blogdata WHERE content_id = '" + blogId + "'";
+
+    console.log(sql);
+    con.query(sql, function(err, res) {
+        if (err) {
+            cb(response);
+        } else {
+            cb(null, res);
+        }
+    });
+
+}
+
 module.exports = webteach;
