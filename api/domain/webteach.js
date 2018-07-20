@@ -69,7 +69,7 @@ webteach.prototype.userSignup = (cb) => {
         "statusCode": 404,
         "message": "Invalid Data"
     }
-    var sql = "INSERT into userdetails values('" + webteach.prototype.data.userName + "','" + webteach.prototype.data.password + "','" + webteach.prototype.data.designation + "','" + webteach.prototype.data.organization + "','" + webteach.prototype.data.email + "')";
+    var sql = "INSERT into userdetails values('" + webteach.prototype.data.userName + "','" + webteach.prototype.data.password + "','" + webteach.prototype.data.email + "')";
     console.log(sql);
     con.query(sql, function(err, res) {
         if (err) {
